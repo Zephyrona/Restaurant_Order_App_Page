@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import {
   Tabs,
@@ -8,44 +9,24 @@ import {
 } from "@material-tailwind/react";
 import CardContainer from "../Card/CardContainer";
 
-export default function TabsComp() {
+export default function TabsComp({ data }) {
   const [activeTab, setActiveTab] = useState("mainmeals");
-  const data = [
-    {
-      label: "Main Meals",
-      value: "mainmeals",
-    },
-    {
-      label: "Appetizers",
-      value: "appetizers",
-    },
-    {
-      label: "Desserts",
-      value: "desserts",
-    },
-    {
-      label: "Drinks",
-      value: "drinks",
-    },
-    {
-      label: "Alcohol",
-      value: "alcohol",
-    },
-  ];
 
   return (
     <Tabs value={activeTab} className="w-full">
       <TabsHeader className="flex flex-col sm:flex-row">
-        {data.map(({ label, value }) => (
+        {data.map(({ name, description }) => (
           <Tab
-            key={value}
-            value={value}
-            onClick={() => setActiveTab(value)}
+            key={description}
+            value={description}
+            onClick={() => setActiveTab(description)}
             className={
-              activeTab === value ? "text-gray-900 text-sm md:text-lg " : ""
+              activeTab === description
+                ? "text-gray-900 text-sm md:text-lg "
+                : ""
             }
           >
-            {label}
+            {name}
           </Tab>
         ))}
       </TabsHeader>
@@ -56,9 +37,9 @@ export default function TabsComp() {
           unmount: { y: 250 },
         }}
       >
-        {data.map(({ value }) => (
-          <TabPanel key={value} value={value}>
-            <CardContainer activeTab={value} />
+        {data.map((item) => (
+          <TabPanel key={item.id} value={item.description}>
+            <CardContainer products={item.products} />
           </TabPanel>
         ))}
       </TabsBody>

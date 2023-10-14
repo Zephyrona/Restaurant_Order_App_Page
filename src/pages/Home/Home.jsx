@@ -10,7 +10,7 @@ export default function Home() {
       <Menu />
       <Contact />
       <Typography className="text-center font-bold text-lg ">
-        © 2021 All rights reserved by Zephyrona
+        © 2023 All rights reserved by Zephyrona
       </Typography>
     </div>
   );
